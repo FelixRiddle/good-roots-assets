@@ -2,7 +2,7 @@
  * Class to create properties with a given configuration
  */
 export default class Properties {
-    userId = 1;
+    userId: number;
     
     /**
      * Properties

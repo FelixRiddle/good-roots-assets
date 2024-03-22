@@ -7,5 +7,5 @@ export default function runAllPropertyImageTests() {
     const propImgs = new PropertyImages();
     const imgs = propImgs.getAll();
     
-    console.log(imgs);
+    // console.log(imgs);
 }

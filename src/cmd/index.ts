@@ -29,9 +29,8 @@ export default async function executeCommands() {
         seedAll();
     }
     
-    console.log(args);
     if(args.test) {
-        runAllTests();
+        await runAllTests();
     }
     
     // process.exit(0);

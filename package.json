@@ -20,12 +20,17 @@
   "dependencies": {
     "argparse": "^2.0.1",
     "axios": "^1.6.5",
+    "dotenv": "^16.4.5",
+    "felixriddle.configuration-mappings": "^1.0.8",
     "felixriddle.good-roots-ts-api": "^1.0.17",
-    "felixriddle.ts-app-models": "^1.0.0"
+    "felixriddle.my-types": "^1.0.2",
+    "felixriddle.ts-app-models": "^1.0.0",
+    "uuid": "^9.0.1"
   },
   "devDependencies": {
     "@types/argparse": "^2.0.16",
     "@types/bcrypt": "^5.0.2",
+    "@types/uuid": "^9.0.8",
     "ts-node": "^10.9.2",
     "tsup": "^8.0.2",
     "typescript": "^5.4.3"
