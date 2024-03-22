@@ -31,7 +31,6 @@ export function imagesToAbsolutePath(images: Array<string>, houseName: string) {
         imagesPath.push(imagePath);
     }
     
-    console.log(`Images path: `, imagesPath);
     return imagesPath;
 }
 

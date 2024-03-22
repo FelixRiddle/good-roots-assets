@@ -1,14 +1,15 @@
 import { ArgumentParser } from "argparse";
 
 import runAllTests from "../test/index";
+import seedAll from "../seed/index";
 
 const parser = new ArgumentParser({
     description: "Argparse example"
 });
 
 // Data for testing
-parser.add_argument("--seed-users", {
-    help: "Insert users into the database",
+parser.add_argument("--seed", {
+    help: "Seed all, removing previous data",
     action: "store_true"
 });
 
@@ -23,6 +24,10 @@ parser.add_argument("--test", {
 export default async function executeCommands() {
     // Parse arguments
     const args = parser.parse_args();
+    
+    if(args.seed) {
+        seedAll();
+    }
     
     console.log(args);
     if(args.test) {
