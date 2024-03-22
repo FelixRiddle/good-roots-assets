@@ -1,7 +1,5 @@
-import AppModel from "felixriddle.ts-app-models";
-
-import Properties from "./Properties";
 import seedAllModels from "./seeder";
+import TsAppModels from "felixriddle.ts-app-models";
 
 /**
  * Seed all
@@ -9,7 +7,6 @@ import seedAllModels from "./seeder";
  * Properties, users, etc.
  */
 export default async function seedAll() {
-    // const props = new Properties();
-    // console.log(`Properties: `, props.getProperties());
+    await TsAppModels.resetTables();
     seedAllModels();
 }
