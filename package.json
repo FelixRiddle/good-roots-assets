@@ -2,15 +2,30 @@
   "name": "good-roots-assets",
   "version": "1.0.0",
   "description": "Good roots assets",
-  "main": "index.js",
-  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test1": "ts-node src/cmd/index.ts --test",
+    "test": "npm run start -- --test",
+    "build": "tsup",
+    "start": "ts-node src/cmd/index.ts"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "argparse": "^2.0.1",
     "axios": "^1.6.5"
+  },
+  "devDependencies": {
+    "@types/argparse": "^2.0.16",
+    "@types/bcrypt": "^5.0.2",
+    "ts-node": "^10.9.2",
+    "tsup": "^8.0.2",
+    "typescript": "^5.4.3"
   }
 }

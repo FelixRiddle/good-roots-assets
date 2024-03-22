@@ -7,11 +7,13 @@ import { fileURLToPath } from 'url';
  * 
  * @returns {string}
  */
-function propertyImagesPath() {
-    const __filename = fileURLToPath(import.meta.url);
-    const __dirname = path.dirname(__filename);
-    const propertyImages = `${__dirname}/../images/properties`;
-    return propertyImages;
+export function propertyImagesPath() {
+    // const __filename = fileURLToPath(import.meta.url);
+    // const __dirname = path.dirname(__filename);
+    // const propertyImages = `${__dirname}/../images/properties`;
+    // return propertyImages;
+    
+    return `${__dirname}/../images/properties`;
 }
 
 /**
@@ -21,7 +23,7 @@ function propertyImagesPath() {
  * @param {string} houseName The house name(the folder containing the images)  
  * @returns 
  */
-function imagesToAbsolutePath(images, houseName) {
+export function imagesToAbsolutePath(images: Array<string>, houseName: string) {
     const propPath = propertyImagesPath();
     const imagesPath = [];
     for(const image of images) {
@@ -42,7 +44,7 @@ export default class PropertyImages {
      * Get all
      */
     getAll() {
-        let result = {};
+        let result: any = {};
         
         const propertyImages = propertyImagesPath();
         
@@ -57,7 +59,6 @@ export default class PropertyImages {
             result[entry] = imagesAbsPath;
         }
         
-        console.log(`Result: `, result);
         return result;
     }
 }

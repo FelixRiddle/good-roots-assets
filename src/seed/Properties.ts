@@ -9,7 +9,7 @@ export default class Properties {
      * 
      * @param {number} userId The user id
      */
-    constructor(userId) {
+    constructor(userId: number) {
         this.userId = userId;
     }
     
