@@ -2,10 +2,12 @@ import dotenv from "dotenv";
 import { v4 as uuidv4 } from "uuid";
 
 import { ExpressAuthentication, FrontendAuthAPI } from "felixriddle.good-roots-ts-api";
-import { LoginInputType, RegisterInputType } from "felixriddle.my-types";
+import { LoginInputType, RegisterInputType, CompleteUserData } from "felixriddle.my-types";
 
 /**
  * Test utils
+ * 
+ * Should be renamed to TemporalUser
  */
 export default class TestLib {
     api: FrontendAuthAPI;
@@ -45,6 +47,20 @@ export default class TestLib {
         await api.loginGetJwt(loginInput);
         
         return new TestLib(api);
+    }
+    
+    /**
+     * User data
+     */
+    async userData(): Promise<CompleteUserData> {
+        const userApi = this.api.userApi();
+        const userData = await userApi.data();
+        
+        if(!userData.user) {
+            throw Error("Couldn't fetch the user");
+        }
+        
+        return userData.user;
     }
     
     /**

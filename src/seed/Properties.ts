@@ -1,16 +1,15 @@
+export const PROPERTIES_QUANTITY = 21;
+
 /**
  * Class to create properties with a given configuration
  */
 export default class Properties {
-    userId: number;
     
     /**
      * Properties
      * 
-     * @param {number} userId The user id
      */
-    constructor(userId: number) {
-        this.userId = userId;
+    constructor() {
     }
     
     /**
@@ -29,13 +28,11 @@ export default class Properties {
             longitude: -90.022207,
             priceId: 5,
             categoryId: 4,
-            image: "",
             published: true,
-            userId: this.userId,
         };
         
         let properties = [];
-        for(let i = 0; i <= 21; i++) {
+        for(let i = 0; i <= PROPERTIES_QUANTITY; i++) {
             // Deep clone
             const newProperty = JSON.parse(JSON.stringify(property));
             newProperty.title = `Luxury house ${i + 1}`;
@@ -43,6 +40,6 @@ export default class Properties {
             properties.push(newProperty);
         }
         
-        console.log(`Properties: `, properties)
+        return properties;
     }
 }
