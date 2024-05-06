@@ -1,10 +1,11 @@
-// import AppModels from "app-models";
-import AppModel from "felixriddle.ts-app-models";
-const MODEL = AppModel.MODEL;
+
+// An error?
+import { Models } from "felixriddle.ts-app-models";
 
 import SEEDS from "./seeds/index";
 
-const db = AppModel.mysqlConn();
+const models = new Models();
+const conn = models.connection;
 
 /**
  * Insert categories data
@@ -13,14 +14,14 @@ export async function insertCategoriesData() {
     console.log(`Inserting categories data`);
     try {
         // Authenticate
-        await db.authenticate();
+        await conn.authenticate();
         
         // Generate columns
-        await db.sync();
+        await conn.sync();
         
         // Insert data
         await Promise.all([
-            MODEL.Category().bulkCreate(SEEDS.CATEGORIES_SEED),
+            models.category().bulkCreate(SEEDS.CATEGORIES_SEED),
         ]);
         
         console.log(`Categories inserted`);
@@ -35,14 +36,14 @@ export async function insertCategoriesData() {
 export async function insertPricesData() {
     try {
         // Authenticate
-        await db.authenticate();
+        await conn.authenticate();
         
         // Generate columns
-        await db.sync();
+        await conn.sync();
         
         // Insert data
         await Promise.all([
-            MODEL.Price().bulkCreate(SEEDS.PRICES_SEED),
+            models.price().bulkCreate(SEEDS.PRICES_SEED),
         ]);
         
         console.log(`Data inserted correctly`);
@@ -57,14 +58,14 @@ export async function insertPricesData() {
 export async function insertTestUserData() {
     try {
         // Authenticate
-        await db.authenticate();
+        await conn.authenticate();
         
         // Generate columns
-        await db.sync();
+        await conn.sync();
         
         // Insert data
         await Promise.all([
-            MODEL.User().bulkCreate(SEEDS.TEST_USERS_SEED),
+            models.user().bulkCreate(SEEDS.TEST_USERS_SEED),
         ]);
         
         console.log(`Data inserted correctly`);
@@ -81,10 +82,10 @@ export async function insertTestPropertiesData() {
     return;
     try {
         // Authenticate
-        await db.authenticate();
+        await conn.authenticate();
         
         // Generate columns
-        await db.sync();
+        await conn.sync();
         
         // Insert data
         await Promise.all([

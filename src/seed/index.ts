@@ -1,5 +1,6 @@
+import { resetTables } from "felixriddle.ts-app-models";
+
 import seedAllModels from "./seeder";
-import TsAppModels from "felixriddle.ts-app-models";
 
 /**
  * Seed all
@@ -7,6 +8,6 @@ import TsAppModels from "felixriddle.ts-app-models";
  * Properties, users, etc.
  */
 export default async function seedAll() {
-    await TsAppModels.resetTables();
+    await resetTables();
     seedAllModels();
 }
