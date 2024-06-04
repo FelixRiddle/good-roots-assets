@@ -29,9 +29,6 @@ export async function insertCategoriesData() {
     try {
         const Category = models.category();
         
-        // Remove all data on the table
-        await Category.truncate();
-        
         // Insert data
         await Promise.all([
             Category.bulkCreate(SEEDS.CATEGORIES_SEED),
@@ -50,9 +47,6 @@ export async function insertPricesData() {
     try {
         const Price = models.price();
         
-        // Remove all data on the table
-        await Price.truncate();
-        
         // Insert data
         await Promise.all([
             Price.bulkCreate(SEEDS.PRICES_SEED),
@@ -70,9 +64,6 @@ export async function insertPricesData() {
 export async function insertTestUserData() {
     try {
         const User = models.user();
-        
-        // Remove all data on the table
-        await User.truncate();
         
         // Insert data
         await Promise.all([
@@ -108,6 +99,38 @@ export async function insertTestPropertiesData() {
     }
 }
 
+// Ordered from higher dependency to lower
+const orderedModels = [
+    models.property(),
+    models.userMessages(),
+    
+    // Non-dependent
+    models.category(),
+    models.price(),
+    models.user(),
+];
+
+/**
+ * Drop all good roots tables
+ */
+export async function dropGoodRootsTables() {
+    for(const model of orderedModels) {
+        await model.drop();
+    }
+}
+
+/**
+ * Create good roots tables
+ */
+export async function createGoodRootsTables() {
+    // We can't use conn.sync to create tables again, because sequelize kinda doesn't know what order are them
+    // and it's my fault for not initializing all tables at once on the class.
+    // Now we want the less dependent first, so we use reverse
+    for(const model of orderedModels.reverse()) {
+        await model.sync();
+    }
+}
+
 /**
  * Seed all models
  */
@@ -115,8 +138,9 @@ export default async function seedAllModels() {
     // Authenticate
     await conn.authenticate();
     
-    // Generate columns
-    await conn.sync();
+    // Drop only good roots tables
+    await dropGoodRootsTables();
+    await createGoodRootsTables();
     
     console.log(`Delete User messages`);
     await deleteUserMessages();
