@@ -8,20 +8,33 @@ const models = new Models();
 const conn = models.connection;
 
 /**
+ * Delete user messages
+ */
+export async function deleteUserMessages() {
+    try {
+        const UserMessages = models.userMessages();
+        
+        // Remove all data of the table
+        await UserMessages.truncate();
+    } catch(err) {
+        console.error(err);
+    }
+}
+
+/**
  * Insert categories data
  */
 export async function insertCategoriesData() {
     console.log(`Inserting categories data`);
     try {
-        // Authenticate
-        await conn.authenticate();
+        const Category = models.category();
         
-        // Generate columns
-        await conn.sync();
+        // Remove all data on the table
+        await Category.truncate();
         
         // Insert data
         await Promise.all([
-            models.category().bulkCreate(SEEDS.CATEGORIES_SEED),
+            Category.bulkCreate(SEEDS.CATEGORIES_SEED),
         ]);
         
         console.log(`Categories inserted`);
@@ -35,15 +48,14 @@ export async function insertCategoriesData() {
  */
 export async function insertPricesData() {
     try {
-        // Authenticate
-        await conn.authenticate();
+        const Price = models.price();
         
-        // Generate columns
-        await conn.sync();
+        // Remove all data on the table
+        await Price.truncate();
         
         // Insert data
         await Promise.all([
-            models.price().bulkCreate(SEEDS.PRICES_SEED),
+            Price.bulkCreate(SEEDS.PRICES_SEED),
         ]);
         
         console.log(`Data inserted correctly`);
@@ -57,15 +69,14 @@ export async function insertPricesData() {
  */
 export async function insertTestUserData() {
     try {
-        // Authenticate
-        await conn.authenticate();
+        const User = models.user();
         
-        // Generate columns
-        await conn.sync();
+        // Remove all data on the table
+        await User.truncate();
         
         // Insert data
         await Promise.all([
-            models.user().bulkCreate(SEEDS.TEST_USERS_SEED),
+            User.bulkCreate(SEEDS.TEST_USERS_SEED),
         ]);
         
         console.log(`Data inserted correctly`);
@@ -101,8 +112,24 @@ export async function insertTestPropertiesData() {
  * Seed all models
  */
 export default async function seedAllModels() {
+    // Authenticate
+    await conn.authenticate();
+    
+    // Generate columns
+    await conn.sync();
+    
+    console.log(`Delete User messages`);
+    await deleteUserMessages();
+    
+    console.log(`Truncate and insert Categories`);
     await insertCategoriesData();
+    
+    console.log(`Truncate and insert Prices`);
     await insertPricesData();
+    
+    console.log(`Truncate and insert Properties`);
     await insertTestPropertiesData();
+    
+    console.log(`Truncate and insert Users`);
     await insertTestUserData();
 }

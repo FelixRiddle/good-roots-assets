@@ -1,5 +1,3 @@
-import { resetTables } from "felixriddle.ts-app-models";
-
 import seedAllModels from "./seeder";
 
 /**
@@ -8,6 +6,5 @@ import seedAllModels from "./seeder";
  * Properties, users, etc.
  */
 export default async function seedAll() {
-    await resetTables();
     seedAllModels();
 }

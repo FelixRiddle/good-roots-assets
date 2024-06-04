@@ -24,7 +24,7 @@
     "felixriddle.configuration-mappings": "^1.0.8",
     "felixriddle.good-roots-ts-api": "^1.0.17",
     "felixriddle.my-types": "^1.0.2",
-    "felixriddle.ts-app-models": "^1.0.0",
+    "felixriddle.ts-app-models": "^1.0.6",
     "uuid": "^9.0.1"
   },
   "devDependencies": {

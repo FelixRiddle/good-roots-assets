@@ -26,6 +26,7 @@ export default async function executeCommands() {
     const args = parser.parse_args();
     
     if(args.seed) {
+        console.log(`Seeding all models`);
         seedAll();
     }
     
