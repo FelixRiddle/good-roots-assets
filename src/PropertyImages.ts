@@ -28,10 +28,11 @@ export function imagesToAbsolutePath(images: Array<string>, houseName: string) {
     return imagesPath;
 }
 
+/**
+ * Property images
+ */
 export default class PropertyImages {
-    constructor() {
-        
-    }
+    constructor() { }
     
     /**
      * Get all

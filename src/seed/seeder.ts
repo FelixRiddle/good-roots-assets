@@ -63,7 +63,7 @@ export async function insertPricesData() {
  */
 export async function insertTestUserData() {
     try {
-        const User = models.user();
+        const User = models.user;
         
         // Insert data
         await Promise.all([
@@ -101,13 +101,22 @@ export async function insertTestPropertiesData() {
 
 // Ordered from higher dependency to lower
 const orderedModels = [
+    // Dependents tier 3
+    // Dependent on Property and User
+    models.propertySellerMessage(),
+    models.propertyComment(),
+    models.propertyRating(),
+    models.userFavoriteProperty(),
+    
+    // Dependents tier 2
     models.property(),
     models.userMessages(),
+    models.userContactMethods(),
     
     // Non-dependent
     models.category(),
     models.price(),
-    models.user(),
+    models.user,
 ];
 
 /**

@@ -27,7 +27,8 @@ export default async function executeCommands() {
     
     if(args.seed) {
         console.log(`Seeding all models`);
-        seedAll();
+        console.log(`This is a destructive action, it will delete all previous data and tables of the 'good-roots' app`);
+        await seedAll();
     }
     
     if(args.test) {
