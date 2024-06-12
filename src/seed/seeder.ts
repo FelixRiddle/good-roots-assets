@@ -27,7 +27,7 @@ export async function deleteUserMessages() {
 export async function insertCategoriesData() {
     console.log(`Inserting categories data`);
     try {
-        const Category = models.category();
+        const Category = models.category;
         
         // Insert data
         await Promise.all([
@@ -114,7 +114,7 @@ const orderedModels = [
     models.userContactMethods(),
     
     // Non-dependent
-    models.category(),
+    models.category,
     models.price(),
     models.user,
 ];
