@@ -30,6 +30,7 @@
   "devDependencies": {
     "@types/argparse": "^2.0.16",
     "@types/bcrypt": "^5.0.2",
+    "@types/node": "^20.14.2",
     "@types/uuid": "^9.0.8",
     "ts-node": "^10.9.2",
     "tsup": "^8.0.2",

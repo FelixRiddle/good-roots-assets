@@ -12,7 +12,7 @@ const conn = models.connection;
  */
 export async function deleteUserMessages() {
     try {
-        const UserMessages = models.userMessages();
+        const UserMessages = models.userMessages;
         
         // Remove all data of the table
         await UserMessages.truncate();
@@ -45,7 +45,7 @@ export async function insertCategoriesData() {
  */
 export async function insertPricesData() {
     try {
-        const Price = models.price();
+        const Price = models.price;
         
         // Insert data
         await Promise.all([
@@ -103,19 +103,19 @@ export async function insertTestPropertiesData() {
 const orderedModels = [
     // Dependents tier 3
     // Dependent on Property and User
-    models.propertySellerMessage(),
-    models.propertyComment(),
-    models.propertyRating(),
-    models.userFavoriteProperty(),
+    models.propertySellerMessage,
+    models.propertyComment,
+    models.propertyRating,
+    models.userFavoriteProperty,
     
     // Dependents tier 2
-    models.property(),
-    models.userMessages(),
-    models.userContactMethods(),
+    models.property,
+    models.userMessages,
+    models.userContactMethods,
     
     // Non-dependent
     models.category,
-    models.price(),
+    models.price,
     models.user,
 ];
 
