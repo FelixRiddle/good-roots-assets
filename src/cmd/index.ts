@@ -2,6 +2,8 @@ import { ArgumentParser } from "argparse";
 
 import runAllTests from "../test/index";
 import seedAll from "../seed/index";
+// import { dropGoodRootsTables } from "../seed/seeder";
+import { Models, RealEstateTables } from "felixriddle.ts-app-models";
 
 const parser = new ArgumentParser({
     description: "Argparse example"
@@ -18,17 +20,32 @@ parser.add_argument("--test", {
     action: "store_true"
 });
 
+parser.add_argument("--drop-tables", {
+    help: "Drop all good roots tables",
+    action: "store_true"
+});
+
 /**
  * Execute commands
  */
 export default async function executeCommands() {
+    const models = new Models();
+    const conn = models.connection;
+    
     // Parse arguments
     const args = parser.parse_args();
+    
+    if(args.drop_tables) {
+        // Reset real estate tables
+        const real = new RealEstateTables(models);
+        await real.drop();
+        console.log(`Dropped all good roots tables`);
+    }
     
     if(args.seed) {
         console.log(`Seeding all models`);
         console.log(`This is a destructive action, it will delete all previous data and tables of the 'good-roots' app`);
-        await seedAll();
+        await seedAll(models);
     }
     
     if(args.test) {
